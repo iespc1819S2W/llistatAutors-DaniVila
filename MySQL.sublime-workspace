@@ -4,68 +4,164 @@
 		"selected_items":
 		[
 			[
-				"btn",
-				"btn-success"
+				"flex",
+				"flex-direction\tproperty"
 			],
 			[
-				"fo",
-				"foreach\tforeach …"
+				"fle",
+				"flex-wrap\tproperty"
 			],
 			[
-				"array",
-				"$arrayId〔variable〕"
+				"alig",
+				"align-self\tproperty"
 			],
 			[
-				"arra",
-				"$arrayId〔variable〕"
+				"fl",
+				"flex-grow\tproperty"
 			],
 			[
-				"th",
-				"th\tTag"
-			],
-			[
-				"thead",
-				"thead-dark"
-			],
-			[
-				"bac",
-				"background\tproperty"
-			],
-			[
-				"cre",
-				"createElement〔function〕"
-			],
-			[
-				"fon",
-				"font-size\tproperty"
-			],
-			[
-				"containe",
-				"container-flex"
-			],
-			[
-				"text",
-				"text-align\tproperty"
-			],
-			[
-				"ali",
-				"align-content\tproperty"
+				"max",
+				"max-width\tproperty"
 			],
 			[
 				"wi",
 				"width\tproperty"
 			],
 			[
-				"back",
-				"background-position\tproperty"
+				"tex",
+				"text-align"
 			],
 			[
-				"mar",
-				"margin\tproperty"
+				"align-",
+				"align-items\tproperty"
 			],
 			[
-				"hea",
-				"header\tTag"
+				"ali",
+				"align-content\tproperty"
+			],
+			[
+				"box",
+				"box-sizing\tproperty"
+			],
+			[
+				"nombre",
+				"nombreValidado"
+			],
+			[
+				"preg",
+				"preg_match〔function〕"
+			],
+			[
+				"ac",
+				"action\tAttr"
+			],
+			[
+				"in",
+				"input\tTag"
+			],
+			[
+				"sub",
+				"submit"
+			],
+			[
+				"form",
+				"form-control\t(login.php)"
+			],
+			[
+				"usuari",
+				"usuarios"
+			],
+			[
+				"location",
+				"location:login.php\t(logout.php)"
+			],
+			[
+				"session",
+				"session_start\t(isLogin.php)"
+			],
+			[
+				"header",
+				"header〔function〕"
+			],
+			[
+				"sessi",
+				"session_destroy\t(login.php)"
+			],
+			[
+				"_",
+				"$_SESSION〔variable〕"
+			],
+			[
+				"_SE",
+				"$_SESSION〔variable〕"
+			],
+			[
+				"_Se",
+				"$_SESSION〔variable〕"
+			],
+			[
+				"sess",
+				"session_destroy〔function〕"
+			],
+			[
+				"els",
+				"else〔keyword〕"
+			],
+			[
+				"min",
+				"minlength\tAttr"
+			],
+			[
+				"ma",
+				"maxlength\tAttr"
+			],
+			[
+				"func",
+				"function〔keyword〕"
+			],
+			[
+				"sc",
+				"script\tTag"
+			],
+			[
+				"scrip",
+				"script"
+			],
+			[
+				"scri",
+				"script"
+			],
+			[
+				"docu",
+				"document〔variable〕"
+			],
+			[
+				"fun",
+				"fun\tFunction"
+			],
+			[
+				"Route",
+				"Route::post\tBasic Post Route."
+			],
+			[
+				"Us",
+				"fbsql_username"
+			],
+			[
+				"User",
+				"fbsql_username"
+			],
+			[
+				"Rou",
+				"Route::post\tBasic Post Route."
+			],
+			[
+				"Rout",
+				"Route::put\tBasic Put Route."
+			],
+			[
+				"SimpleReload",
+				"SimpleReloadPlugin.py"
 			]
 		]
 	},
@@ -75,7 +171,7 @@
 			"file": "index.php",
 			"settings":
 			{
-				"buffer_size": 2213,
+				"buffer_size": 2239,
 				"encoding": "UTF-8",
 				"line_ending": "Windows"
 			}
@@ -93,23 +189,63 @@
 		"selected_items":
 		[
 			[
-				"install",
+				"insta",
 				"Package Control: Install Package"
 			],
 			[
 				"package",
-				"Package Control: Remove Package"
+				"Package Control: Disable Package"
+			],
+			[
+				"install",
+				"Package Control: Install Package"
+			],
+			[
+				"Side bar",
+				"Side Bar: Refresh"
+			],
+			[
+				"live",
+				"LiveReload: Self test"
+			],
+			[
+				"isntall",
+				"Package Control: Install Package"
+			],
+			[
+				"packa",
+				"Package Control: Install Package"
 			],
 			[
 				"pack",
-				"Install Package Control"
+				"Package Control: Remove Package"
+			],
+			[
+				"instala",
+				"Package Control: Install Package"
+			],
+			[
+				"php",
+				"PHPCompanion:Find Use"
+			],
+			[
+				"LiveReload: Enable/disable plugins",
+				"LiveReload: Enable/disable plug-ins"
+			],
+			[
+				"enable live",
+				"LiveReload: Enable/disable plug-ins"
+			],
+			[
+				"pac",
+				"Package Control: Install Package"
 			]
 		],
 		"width": 0.0
 	},
 	"console":
 	{
-		"height": 0.0,
+		"height": 220.0,
 		"history":
 		[
 		]
@@ -125,32 +261,57 @@
 	},
 	"expanded_folders":
 	[
-		"/C/xampp/htdocs/MySQL"
+		"/C/xampp/htdocs/SERVIDOR/MySQL/Biblioteca"
 	],
 	"file_history":
 	[
-		"/C/Users/Dani/Desktop/WEB/style2.css",
-		"/C/Users/Dani/Desktop/WEB/index3.html",
-		"/C/Users/Dani/Desktop/DWCLIENT/TEMA 5/desitjos.html",
-		"/C/Users/Dani/Desktop/WEB/index.html",
-		"/C/Users/Dani/Desktop/WEB/style.css",
-		"/C/Users/Dani/Desktop/EXAMEN/inici.php",
-		"/C/Users/Dani/Google Drive/S2W/WEB/header-bg.jpg",
-		"/C/Users/Dani/AppData/Roaming/Sublime Text 3/Packages/LiveReload/LiveReload.sublime-settings",
-		"/C/xampp/htdocs/PujarFitxer/descarregaArxiu.php",
+		"/C/xampp/htdocs/SERVIDOR/MySQL/Biblioteca/MySQL.sublime-project",
+		"/C/Users/Dani/AppData/Roaming/Sublime Text 3/Packages/ColorPicker/ColorPicker.sublime-settings",
+		"/C/Users/Dani/Google Drive/S2W/WEB/style.css",
+		"/C/Users/Dani/Desktop/flex-grow/index.html",
+		"/C/Users/Dani/Desktop/flex-grow/css/style.css",
+		"/C/Users/Dani/Desktop/basicos-flexbox/01-inicio/index.html",
+		"/C/Users/Dani/Desktop/basicos-flexbox/01-inicio/styles.css",
+		"/C/xampp/htdocs/EXAMEN/validar.php",
+		"/C/xampp/htdocs/EXAMEN/inici.php",
 		"/C/Users/Dani/AppData/Roaming/Sublime Text 3/Packages/phpfmt/phpfmt.sublime-settings",
-		"/C/xampp/htdocs/PujarFitxer/login.php",
-		"/C/xampp/htdocs/PujarFitxer/guardaSubida.php",
-		"/C/xampp/htdocs/PujarFitxer/isLogin.php",
-		"/C/Users/Dani/AppData/Roaming/Sublime Text 3/Packages/phpcbf/Default (Windows).sublime-keymap",
-		"/C/Users/Dani/AppData/Roaming/Sublime Text 3/Packages/phpcbf/phpcbf.sublime-settings",
-		"/C/Users/Dani/AppData/Roaming/Sublime Text 3/Packages/HTML-CSS-JS Prettify/HTMLPrettify.sublime-settings",
+		"/C/xampp/htdocs/Practica PHP/login.php",
+		"/C/xampp/htdocs/Practica PHP/isLogin.php",
+		"/C/xampp/htdocs/Practica PHP/logout.php",
+		"/C/xampp/htdocs/Practica PHP/usuarios.txt",
+		"/C/Users/Dani/Desktop/Practica PHP/index.php",
+		"/C/Users/Dani/Desktop/Practica PHP/logout.php",
+		"/C/Users/Dani/Desktop/Practica PHP/isLogin.php",
+		"/C/Users/Dani/Desktop/Practica PHP/login.php",
+		"/C/Users/Dani/Desktop/DWCLIENT/TEMA 4/dadesPersonals.html",
+		"/C/Users/Dani/Desktop/DWCLIENT/TEMA 4/validacio.js",
 		"/C/Users/Dani/AppData/Roaming/Sublime Text 3/Packages/HTML-CSS-JS Prettify/Default (Windows).sublime-keymap",
-		"/C/Users/Dani/AppData/Roaming/Sublime Text 3/Packages/HTML-CSS-JS Prettify/.jsbeautifyrc.defaults.json"
+		"/C/Users/Dani/AppData/Roaming/Sublime Text 3/Packages/User/Default (Windows).sublime-keymap",
+		"/C/Users/Dani/Desktop/DWCLIENT/TEMA 4/exercicis.html",
+		"/C/Users/Dani/Desktop/DWCLIENT/TEMA 4/exercicis.txt",
+		"/C/Users/Dani/Desktop/DWCLIENT/TEMA 4/validacion.js",
+		"/C/Users/Dani/AppData/Roaming/Sublime Merge/Packages/User/Preferences.sublime-settings",
+		"/C/xampp/htdocs/SERVIDOR/Sessio2/home.php",
+		"/C/xampp/htdocs/SERVIDOR/Sessio2/comprova.php",
+		"/C/Users/Dani/AppData/Roaming/Sublime Text 3/Packages/User/Side Bar.sublime-settings",
+		"/C/Users/Dani/Desktop/probando/validacion.js",
+		"/C/Users/Dani/Desktop/JS/validacion.js",
+		"/C/xampp/htdocs/videolaravel/routes/web.php",
+		"/C/xampp/htdocs/videolaravel/routes/api.php",
+		"/C/Users/Dani/AppData/Roaming/Sublime Text 3/Packages/PHP Companion/PHP Companion.sublime-settings",
+		"/C/xampp/htdocs/videolaravel/app/Video.php",
+		"/C/xampp/htdocs/videolaravel/app/User.php",
+		"/C/Users/Dani/Desktop/Nueva carpeta (2)/CLIENT/validar.js",
+		"/C/Users/Dani/Desktop/Nueva carpeta (2)/CLIENT/dadesPersonals.html",
+		"/C/Users/Dani/AppData/Roaming/Sublime Text 3/Packages/LiveReload/LiveReload.sublime-settings",
+		"/C/Users/Dani/AppData/Roaming/Sublime Text 3/Packages/User/LiveReload.sublime-settings",
+		"/C/Users/Dani/Desktop/Nueva carpeta (2)/CLIENT/repGet.html",
+		"/C/Users/Dani/Desktop/Nueva carpeta (2)/CLIENT/html.php",
+		"/C/Users/Dani/Desktop/Nueva carpeta (2)/CLIENT/modificaForm.html"
 	],
 	"find":
 	{
-		"height": 34.0
+		"height": 41.0
 	},
 	"find_in_files":
 	{
@@ -190,27 +351,19 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 2213,
+						"buffer_size": 2239,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								343,
-								343
+								367,
+								367
 							]
 						],
 						"settings":
 						{
-							"SL.13.region_keys":
-							[
-								"sublime_linter.protected_regions"
-							],
-							"SL.35.region_keys":
-							[
-								"sublime_linter.protected_regions"
-							],
 							"auto_complete": false,
 							"bracket_highlighter.busy": false,
 							"bracket_highlighter.clone": -1,
@@ -218,12 +371,27 @@
 							{
 								"close":
 								{
+									"1":
+									[
+										1883,
+										1884
+									]
 								},
 								"icon":
 								{
+									"1":
+									[
+										"Packages/BracketHighlighter/icons/round_bracket.png",
+										"region.yellowish"
+									]
 								},
 								"open":
 								{
+									"1":
+									[
+										1837,
+										1838
+									]
 								},
 								"unmatched":
 								{
@@ -231,114 +399,26 @@
 							},
 							"bracket_highlighter.clone_regions":
 							[
-								"bh_default",
-								"bh_default_center",
-								"bh_default_open",
-								"bh_default_close",
-								"bh_default_content",
 								"bh_regex",
 								"bh_regex_center",
 								"bh_regex_open",
 								"bh_regex_close",
 								"bh_regex_content",
-								"bh_double_quote",
-								"bh_double_quote_center",
-								"bh_double_quote_open",
-								"bh_double_quote_close",
-								"bh_double_quote_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
 								"bh_angle",
 								"bh_angle_center",
 								"bh_angle_open",
 								"bh_angle_close",
 								"bh_angle_content",
-								"bh_single_quote",
-								"bh_single_quote_center",
-								"bh_single_quote_open",
-								"bh_single_quote_close",
-								"bh_single_quote_content",
-								"bh_round",
-								"bh_round_center",
-								"bh_round_open",
-								"bh_round_close",
-								"bh_round_content",
-								"bh_c_define",
-								"bh_c_define_center",
-								"bh_c_define_open",
-								"bh_c_define_close",
-								"bh_c_define_content",
-								"bh_unmatched",
-								"bh_unmatched_center",
-								"bh_unmatched_open",
-								"bh_unmatched_close",
-								"bh_unmatched_content",
-								"bh_tag",
-								"bh_tag_center",
-								"bh_tag_open",
-								"bh_tag_close",
-								"bh_tag_content",
-								"bh_curly",
-								"bh_curly_center",
-								"bh_curly_open",
-								"bh_curly_close",
-								"bh_curly_content",
-								"bh_square",
-								"bh_square_center",
-								"bh_square_open",
-								"bh_square_close",
-								"bh_square_content"
-							],
-							"bracket_highlighter.locations":
-							{
-								"close":
-								{
-									"1":
-									[
-										343,
-										344
-									]
-								},
-								"icon":
-								{
-									"1":
-									[
-										"Packages/BracketHighlighter/icons/single_quote.png",
-										"region.greenish"
-									]
-								},
-								"open":
-								{
-									"1":
-									[
-										341,
-										342
-									]
-								},
-								"unmatched":
-								{
-								}
-							},
-							"bracket_highlighter.regions":
-							[
-								"bh_c_define",
-								"bh_c_define_center",
-								"bh_c_define_open",
-								"bh_c_define_close",
-								"bh_c_define_content",
-								"bh_round",
-								"bh_round_center",
-								"bh_round_open",
-								"bh_round_close",
-								"bh_round_content",
-								"bh_single_quote",
-								"bh_single_quote_center",
-								"bh_single_quote_open",
-								"bh_single_quote_close",
-								"bh_single_quote_content",
-								"bh_curly",
-								"bh_curly_center",
-								"bh_curly_open",
-								"bh_curly_close",
-								"bh_curly_content",
 								"bh_square",
 								"bh_square_center",
 								"bh_square_open",
@@ -349,31 +429,119 @@
 								"bh_default_open",
 								"bh_default_close",
 								"bh_default_content",
-								"bh_angle",
-								"bh_angle_center",
-								"bh_angle_open",
-								"bh_angle_close",
-								"bh_angle_content",
-								"bh_unmatched",
-								"bh_unmatched_center",
-								"bh_unmatched_open",
-								"bh_unmatched_close",
-								"bh_unmatched_content",
-								"bh_double_quote",
-								"bh_double_quote_center",
-								"bh_double_quote_open",
-								"bh_double_quote_close",
-								"bh_double_quote_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
 								"bh_tag",
 								"bh_tag_center",
 								"bh_tag_open",
 								"bh_tag_close",
 								"bh_tag_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content"
+							],
+							"bracket_highlighter.locations":
+							{
+								"close":
+								{
+									"1":
+									[
+										369,
+										370
+									]
+								},
+								"icon":
+								{
+									"1":
+									[
+										"Packages/BracketHighlighter/icons/double_quote.png",
+										"region.greenish"
+									]
+								},
+								"open":
+								{
+									"1":
+									[
+										297,
+										298
+									]
+								},
+								"unmatched":
+								{
+								}
+							},
+							"bracket_highlighter.regions":
+							[
 								"bh_regex",
 								"bh_regex_center",
 								"bh_regex_open",
 								"bh_regex_close",
-								"bh_regex_content"
+								"bh_regex_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content"
 							],
 							"syntax": "Packages/PHP/PHP.sublime-syntax",
 							"tab_size": 4,
@@ -391,7 +559,7 @@
 	],
 	"incremental_find":
 	{
-		"height": 34.0
+		"height": 41.0
 	},
 	"input":
 	{
@@ -432,11 +600,15 @@
 	{
 		"height": 0.0
 	},
+	"output.unsaved_changes":
+	{
+		"height": 266.0
+	},
 	"pinned_build_system": "",
 	"project": "MySQL.sublime-project",
 	"replace":
 	{
-		"height": 64.0
+		"height": 78.0
 	},
 	"save_all_on_build": true,
 	"select_file":
@@ -445,6 +617,22 @@
 		"last_filter": "",
 		"selected_items":
 		[
+			[
+				"web",
+				"routes\\web.php"
+			],
+			[
+				"video",
+				"app\\Video.php"
+			],
+			[
+				"dade",
+				"dadesPersonals.html"
+			],
+			[
+				"modi",
+				"modificaForm.html"
+			]
 		],
 		"width": 0.0
 	},
@@ -454,6 +642,10 @@
 		"last_filter": "",
 		"selected_items":
 		[
+			[
+				"",
+				"C:\\Users\\Dani\\Google Drive\\S2W\\WEB\\Web.sublime-project"
+			]
 		],
 		"width": 380.0
 	},
@@ -474,7 +666,7 @@
 	"show_open_files": false,
 	"show_tabs": true,
 	"side_bar_visible": true,
-	"side_bar_width": 197.0,
+	"side_bar_width": 150.0,
 	"status_bar_visible": true,
 	"template_settings":
 	{

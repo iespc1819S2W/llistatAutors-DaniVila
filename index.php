@@ -13,8 +13,11 @@ if (isset($_POST['ordreId0'])) {
 if (isset($_POST['ordreId1'])) {
 	$ordre = 'id_aut DESC';
 }
-if (isset($_POST['cercaNom'])) {
-	$cercaNom = ' WHERE nom_aut = "' . $_POST['cercaNom'] . '"';
+if (!empty($_POST['cercaNom'])) {
+	$cercaNom = " WHERE nom_aut LIKE '%" . $_POST['cercaNom'] . "%'";
+}
+if (!empty($_POST['cercaId'])) {
+	$cercaNom = " WHERE id_aut = '" . $_POST['cercaId'] . "'";
 }
 
 ?>
@@ -35,7 +38,8 @@ if (isset($_POST['cercaNom'])) {
 <body>
 <form action="" method="post">
     <div class="container mt-5 mb-2">
-        <label>Cerca: </label><input type="text" name="cercaNom">
+        <label>Nom: </label><input type="text" name="cercaNom">
+                <label>ID: </label><input type="text" name="cercaId">
         <button class="btn btn-success" type="submit" name="ordreNom0">A-Z</button>
         <button class="btn btn-success" type="submit" name="ordreNom1">Z-A</button>
         <button class="btn btn-primary" type="submit" name="ordreId0">ID 0</button>
