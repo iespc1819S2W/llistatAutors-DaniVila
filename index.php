@@ -1,9 +1,13 @@
 <?php
 include "mysqli.php";
 
+// Variables
 $ordre = 'nom_aut ASC';
 $cercaNom = '';
+$limit = '20';
+$pagina = '0';
 
+// Filtres
 if (isset($_GET['cercaHidden'])) {
     $cercaNom = $_GET['cercaHidden'];
 }
@@ -20,12 +24,18 @@ if (!empty($_GET['cercaNom'])) {
     $cercaNom = " WHERE id_aut = '" . $_GET['cercaNom'] . "' OR " . " nom_aut LIKE '%" . $_GET['cercaNom'] . "%'";
 }
 
+// Paginacio
+if (!empty($_GET['seguent'])) {
+    $pagina = $pagina + 20;
+}
+
+
 ?>
 
 
 
 <!doctype html>
-<html lang="en">
+<html lang="es">
 
 <head>
     <meta charset="UTF-8">
@@ -45,6 +55,7 @@ if (!empty($_GET['cercaNom'])) {
             <button class="btn btn-success" type="submit" name="ordreNom1">Z-A</button>
             <button class="btn btn-primary" type="submit" name="ordreId0">ID 0</button>
             <button class="btn btn-primary" type="submit" name="ordreId1">ID 1</button>
+            <button class="btn btn-primary" type="submit" name="seguent"> -> </button>
         </div>
     </form>
     <div class="container">
@@ -56,7 +67,7 @@ if (!empty($_GET['cercaNom'])) {
                 </tr>
             </thead>
             <tbody>
-                <?php $query = "SELECT id_aut, nom_aut FROM autors $cercaNom ORDER BY $ordre LIMIT 20"; ?>
+                <?php $query = "SELECT id_aut, nom_aut FROM autors $cercaNom ORDER BY $ordre LIMIT  $pagina,$limit"; ?>
                 <?php echo $query ?>;
                 <?php if ($cursor = $mysqli->query($query) or die($sql)) : ?>
                 <?php while ($row = $cursor->fetch_assoc()) : ?>
