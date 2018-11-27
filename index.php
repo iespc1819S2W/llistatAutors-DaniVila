@@ -2,14 +2,22 @@
 include "mysqli.php";
 
 // Variables
-$ordre = 'nom_aut ASC';
+$ordre = isset($_GET['ordreHidden']) ? $_GET['ordreHidden'] : 'nom_aut ASC' ;
 $cercaNom = '';
-$limit = '20';
-$pagina = '0';
+$limit = '5';
+$pagina = isset($_GET['paginaHidden']) ? $_GET['paginaHidden'] : 0 ;
+
+// Consulta
+
+
 
 // Filtres
+
 if (isset($_GET['cercaHidden'])) {
     $cercaNom = $_GET['cercaHidden'];
+}
+if (isset($_GET['ordreNom0'])) {
+    $ordre = 'nom_aut ASC';
 }
 if (isset($_GET['ordreNom1'])) {
     $ordre = 'nom_aut DESC';
@@ -22,14 +30,37 @@ if (isset($_GET['ordreId1'])) {
 }
 if (!empty($_GET['cercaNom'])) {
     $cercaNom = " WHERE id_aut = '" . $_GET['cercaNom'] . "' OR " . " nom_aut LIKE '%" . $_GET['cercaNom'] . "%'";
+} else {
+    $cercaNom = '';
 }
 
 // Paginacio
-if (!empty($_GET['seguent'])) {
-    $pagina = $pagina + 20;
+
+$tupla = $pagina * $limit;
+
+$consulta = "SELECT count(id_aut) FROM autors $cercaNom";
+if ($cursor =  $mysqli->query($consulta) or die($sql)) {
+    $row = $cursor->fetch_row();
+    $tuplaTotal = $row[0];
 }
 
+if (isset($_GET['seguent'])) {
+    if($pagina < $tuplaTotal){
+        $pagina = $pagina + 1;
+    }
+}
 
+if (isset($_GET['atras'])) {
+    $pagina = $pagina - 1;
+}
+
+if (isset($_GET['ultim'])) {
+    $tupla = $tuplaTotal - 1;
+}
+
+if (isset($_GET['primera'])) {
+    $pagina = 0;
+}
 ?>
 
 
@@ -49,15 +80,17 @@ if (!empty($_GET['seguent'])) {
 <body>
     <form action="" method="get">
         <div class="container mt-5 mb-2">
-            <label>Cerca : </label><input type="text" name="cercaNom" value="<?=(isset($_GET['cercaNom'])) ? $_GET['cercaNom'] : "" ;?>">
-            <input type="hidden" name="cercaHidden" value="<?=$cercaNom?>">
+            <label>Cerca : </label><input type="text" name="cercaNom" value="<?= (isset($_GET['cercaNom'])) ? $_GET['cercaNom'] : ""; ?>">
+            <input type="hidden" name="cercaHidden" value="<?= $cercaNom ?>">
+            <input type="hidden" name="paginaHidden" value="<?= $pagina ?>">
+            <input type="hidden" name="ordreHidden" value="<?= $ordre ?>">
             <button class="btn btn-success" type="submit" name="ordreNom0">A-Z</button>
             <button class="btn btn-success" type="submit" name="ordreNom1">Z-A</button>
             <button class="btn btn-primary" type="submit" name="ordreId0">ID 0</button>
             <button class="btn btn-primary" type="submit" name="ordreId1">ID 1</button>
-            <button class="btn btn-primary" type="submit" name="seguent"> -> </button>
+            
         </div>
-    </form>
+    
     <div class="container">
         <table class="table">
             <thead class="thead-dark">
@@ -67,7 +100,7 @@ if (!empty($_GET['seguent'])) {
                 </tr>
             </thead>
             <tbody>
-                <?php $query = "SELECT id_aut, nom_aut FROM autors $cercaNom ORDER BY $ordre LIMIT  $pagina,$limit"; ?>
+                <?php $query = "SELECT id_aut, nom_aut FROM autors $cercaNom ORDER BY $ordre LIMIT  $tupla,$limit"; ?>
                 <?php echo $query ?>;
                 <?php if ($cursor = $mysqli->query($query) or die($sql)) : ?>
                 <?php while ($row = $cursor->fetch_assoc()) : ?>
@@ -83,6 +116,12 @@ if (!empty($_GET['seguent'])) {
                 <?php endif; ?>
             </tbody>
         </table>
+            <button class="btn btn-primary" type="submit" name="primera"> <<- </button>
+            <button class="btn btn-primary" type="submit" name="atras"> <- </button>
+            <button class="btn btn-primary" type="submit" name="seguent"> -> </button>
+            <button class="btn btn-primary" type="submit" name="ultim"> ->> </button>
+            
+        </form>
     </div>
 </body>
 
