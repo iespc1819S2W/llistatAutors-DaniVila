@@ -1,21 +1,8 @@
 <?php
 include "mysqli.php";
 
-// Variables
+// Filtres per ordre
 $ordre = isset($_GET['ordreHidden']) ? $_GET['ordreHidden'] : 'nom_aut ASC' ;
-$cercaNom = '';
-$limit = '5';
-$pagina = isset($_GET['paginaHidden']) ? $_GET['paginaHidden'] : 0 ;
-
-// Consulta
-
-
-
-// Filtres
-
-if (isset($_GET['cercaHidden'])) {
-    $cercaNom = $_GET['cercaHidden'];
-}
 if (isset($_GET['ordreNom0'])) {
     $ordre = 'nom_aut ASC';
 }
@@ -28,6 +15,11 @@ if (isset($_GET['ordreId0'])) {
 if (isset($_GET['ordreId1'])) {
     $ordre = 'id_aut DESC';
 }
+
+
+//Filtres per cerca
+$cercaNom = isset($_GET['cercaHidden']) ? $_GET['cercaHidden'] : '';
+
 if (!empty($_GET['cercaNom'])) {
     $cercaNom = " WHERE id_aut = '" . $_GET['cercaNom'] . "' OR " . " nom_aut LIKE '%" . $_GET['cercaNom'] . "%'";
 } else {
@@ -35,32 +27,45 @@ if (!empty($_GET['cercaNom'])) {
 }
 
 // Paginacio
+$numero_per_pagina = '5';
 
-$tupla = $pagina * $limit;
+if (isset($_GET['paginaHidden'])) {
+    $pagina =  $_GET['paginaHidden'];    
+} else {
+    $pagina = 0;
+}
 
+
+// TOTAL ROWS
 $consulta = "SELECT count(id_aut) FROM autors $cercaNom";
 if ($cursor =  $mysqli->query($consulta) or die($sql)) {
     $row = $cursor->fetch_row();
-    $tuplaTotal = $row[0];
+    $total_registres = $row[0];
+    $total_pagines = ceil($total_registres / $numero_per_pagina);
 }
 
 if (isset($_GET['seguent'])) {
-    if($pagina < $tuplaTotal){
-        $pagina = $pagina + 1;
-    }
+    if ($total_pagines > $pagina+1) {
+        $pagina++;
+    } 
 }
 
 if (isset($_GET['atras'])) {
-    $pagina = $pagina - 1;
+    if ($pagina > 0) {
+        $pagina--;
+    }
 }
 
 if (isset($_GET['ultim'])) {
-    $tupla = $tuplaTotal - 1;
+    $pagina = $total_pagines - 1;
 }
 
 if (isset($_GET['primera'])) {
+    $empieza = 0;
     $pagina = 0;
 }
+$empieza = $pagina * $numero_per_pagina;
+
 ?>
 
 
@@ -100,7 +105,7 @@ if (isset($_GET['primera'])) {
                 </tr>
             </thead>
             <tbody>
-                <?php $query = "SELECT id_aut, nom_aut FROM autors $cercaNom ORDER BY $ordre LIMIT  $tupla,$limit"; ?>
+                <?php $query = "SELECT id_aut, nom_aut FROM autors $cercaNom ORDER BY $ordre LIMIT  $empieza,$numero_per_pagina"; ?>
                 <?php echo $query ?>;
                 <?php if ($cursor = $mysqli->query($query) or die($sql)) : ?>
                 <?php while ($row = $cursor->fetch_assoc()) : ?>
