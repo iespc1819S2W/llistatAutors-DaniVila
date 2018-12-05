@@ -1,133 +1,163 @@
-<?php
-include "mysqli.php";
+<?php 
 
-// Filtres per ordre
-$ordre = isset($_GET['ordreHidden']) ? $_GET['ordreHidden'] : 'nom_aut ASC' ;
-if (isset($_GET['ordreNom0'])) {
-    $ordre = 'nom_aut ASC';
-}
-if (isset($_GET['ordreNom1'])) {
-    $ordre = 'nom_aut DESC';
-}
-if (isset($_GET['ordreId0'])) {
-    $ordre = 'id_aut ASC';
-}
-if (isset($_GET['ordreId1'])) {
-    $ordre = 'id_aut DESC';
-}
+    include_once 'conexion.php';
+		
+		
+		// Session
+    session_start();
+		$nombre = isset($_SESSION['nombre']) ? $_SESSION['nombre'] : '';
+		$orden = isset($_SESSION['orden']) ? $_SESSION['orden'] : " ORDER BY ID_AUT ASC ";
 
 
-//Filtres per cerca
-$cercaNom = isset($_GET['cercaHidden']) ? $_GET['cercaHidden'] : '';
 
-if (!empty($_GET['cercaNom'])) {
-    $cercaNom = " WHERE id_aut = '" . $_GET['cercaNom'] . "' OR " . " nom_aut LIKE '%" . $_GET['cercaNom'] . "%'";
-} else {
-    $cercaNom = '';
-}
+		//Ordenación
+		if (isset($_GET['ascID'])) {
+			$orden = " ORDER BY ID_AUT ASC ";			
+		}
 
-// Paginacio
-$numero_per_pagina = '5';
+		if (isset($_GET['descID'])) {
+			$orden = " ORDER BY ID_AUT DESC ";
+		}
 
-if (isset($_GET['paginaHidden'])) {
-    $pagina =  $_GET['paginaHidden'];    
-} else {
-    $pagina = 0;
-}
+		if (isset($_GET['nomASC'])) {
+			$orden = " ORDER BY NOM_AUT ASC ";
+		}
+
+		if (isset($_GET['nomDESC'])) {
+			$orden = " ORDER BY NOM_AUT DESC ";
+		}
+
+		$_SESSION['orden'] = $orden;
 
 
-// TOTAL ROWS
-$consulta = "SELECT count(id_aut) FROM autors $cercaNom";
-if ($cursor =  $mysqli->query($consulta) or die($sql)) {
-    $row = $cursor->fetch_row();
-    $total_registres = $row[0];
-    $total_pagines = ceil($total_registres / $numero_per_pagina);
-}
 
-if (isset($_GET['seguent'])) {
-    if ($total_pagines > $pagina+1) {
-        $pagina++;
-    } 
-}
 
-if (isset($_GET['atras'])) {
-    if ($pagina > 0) {
-        $pagina--;
-    }
-}
+    //Total registros máximos
+    $pagina_maximo = 10;
+    $pagina = !empty($_GET['pagina']) ? $_GET['pagina'] : 0;
+    $paginas = $pagina * $pagina_maximo;
 
-if (isset($_GET['ultim'])) {
-    $pagina = $total_pagines - 1;
-}
 
-if (isset($_GET['primera'])) {
-    $empieza = 0;
-    $pagina = 0;
-}
-$empieza = $pagina * $numero_per_pagina;
 
+
+
+    //Consulta para tabla
+    $nombre = isset($_GET['nombre']) ? "WHERE NOM_AUT LIKE '%". $_GET['nombre'] . "%'" : "";
+    $sql = "SELECT ID_AUT, NOM_AUT FROM autors $nombre $orden LIMIT $paginas,$pagina_maximo";
+    // echo($sql);
+    $pdo = $con->prepare($sql);
+    $pdo->execute();
+		$row = $pdo->fetchAll(PDO::FETCH_ASSOC);
+		// echo("<pre>");
+		// print_r($row);
+		// echo("<pre>");
+
+
+
+
+    //Total de paginas
+    $sql = "SELECT ID_AUT FROM autors $nombre ORDER BY ID_AUT ASC";
+    $pdo = $con->prepare($sql);
+    $pdo->execute();
+    $row_total = $pdo->rowCount();
+		$pagina_total = ceil($row_total / $pagina_maximo);
+		
+
+
+		// if (isset($_POST['nuevo'])) {
+		// 	$sql = "INSERT INTO AUTORS(NOM_AUT) VALUES ('DANI')";
+		// 	$pdo = $con->prepare($sql);
+		// 	$pdo->execute();
+
+		// }
+
+
+
+		//DELETE
+
+		if(isset($_GET['eliminar'])){
+
+			$sql = "DELETE FROM AUTORS WHERE ID = " . $_GET['eliminar'];
+		}
 ?>
 
 
 
-<!doctype html>
-<html lang="es">
+<!DOCTYPE html>
+<html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
-        crossorigin="anonymous">
-    <title>Llista autors</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<title>Llista</title>
 </head>
 
 <body>
-    <form action="" method="get">
-        <div class="container mt-5 mb-2">
-            <label>Cerca : </label><input type="text" name="cercaNom" value="<?= (isset($_GET['cercaNom'])) ? $_GET['cercaNom'] : ""; ?>">
-            <input type="hidden" name="cercaHidden" value="<?= $cercaNom ?>">
-            <input type="hidden" name="paginaHidden" value="<?= $pagina ?>">
-            <input type="hidden" name="ordreHidden" value="<?= $ordre ?>">
-            <button class="btn btn-success" type="submit" name="ordreNom0">A-Z</button>
-            <button class="btn btn-success" type="submit" name="ordreNom1">Z-A</button>
-            <button class="btn btn-primary" type="submit" name="ordreId0">ID 0</button>
-            <button class="btn btn-primary" type="submit" name="ordreId1">ID 1</button>
-            
-        </div>
-    
-    <div class="container">
-        <table class="table">
-            <thead class="thead-dark">
-                <tr>
-                    <th>ID</th>
-                    <th>Nom autors</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php $query = "SELECT id_aut, nom_aut FROM autors $cercaNom ORDER BY $ordre LIMIT  $empieza,$numero_per_pagina"; ?>
-                <?php echo $query ?>;
-                <?php if ($cursor = $mysqli->query($query) or die($sql)) : ?>
-                <?php while ($row = $cursor->fetch_assoc()) : ?>
-                <tr>
-                    <td>
-                        <?php echo $row['id_aut']; ?>
-                    </td>
-                    <td>
-                        <?php echo $row['nom_aut']; ?>
-                    </td>
-                </tr>
-                <?php endwhile; ?>
-                <?php endif; ?>
-            </tbody>
-        </table>
-            <button class="btn btn-primary" type="submit" name="primera"> <<- </button>
-            <button class="btn btn-primary" type="submit" name="atras"> <- </button>
-            <button class="btn btn-primary" type="submit" name="seguent"> -> </button>
-            <button class="btn btn-primary" type="submit" name="ultim"> ->> </button>
-            
-        </form>
-    </div>
+	<nav>
+		<div class="blue-grey darken-4 nav-wrapper">
+			<a href="logout.php" class="brand-logo center">Biblioteca</a>
+		</div>
+	</nav>
+	<br>
+	<div class="container">
+		<div class="row">
+			<form action="" method="get">
+				<div class="input-field col s4">
+					<input id="name" type="text" name="nombre" class="validate" value="<?= isset($_GET['nombre']) ? $_GET['nombre'] : '' ?>">
+					<label for="name">Buscar autor</label>
+				</div>
+				<div class="input-field col s2">
+					<button type="submit" class="blue lighten-2 waves-effect waves-light btn"><i class="material-icons left">search</i>Buscar</a>
+				</div>
+				<div class="input-field col s2">
+				<?php if ($orden == " ORDER BY ID_AUT DESC "): ?>
+					<button type="submit" class="blue lighten-2 waves-effect waves-light btn" name="ascID" value="<?= $orden ?>">0</button>
+				<?php else :?>
+					<button type="submit" class="blue lighten-2 waves-effect waves-light btn" name="descID" value="<?= $orden ?>">6000</button>
+				<?php endif ?>
+				<?php if ($orden == " ORDER BY NOM_AUT DESC "): ?>
+					<button type="submit" class="blue lighten-2 waves-effect waves-light btn" name="nomASC" value="<?= $orden ?>">INICI</button>
+				<?php else: ?>
+					<button type="submit" class="blue lighten-2 waves-effect waves-light btn" name="nomDESC" value="<?= $orden ?>">Fi</button>
+				<?php endif ?>
+				</div>
+		</div>
+		<table class="striped">
+			<tr>
+				<th>ID</th>
+				<th>AUTOR</th>
+				<th>ACTION</th>
+			</tr>
+			<?php foreach($row as $value): ?>
+			<tr>
+				<td>
+					<?= $value['ID_AUT'] ?>
+				</td>
+				<td>
+					<?= $value['NOM_AUT'] ?>
+				</td>
+				<td>
+					<button type="submit" value="<?php $value['ID_AUT'] ?>">Editar</button>
+					<button type="submit" name="eliminar" value="<?php $value['ID_AUT'] ?>">Eliminar</button>
+				</td>
+			</tr>
+			<?php endforeach ?>
+
+		</table>
+		<ul class="pagination">
+			<li><button type="submit" class="btn waves-effect" name="pagina" value="0"><i class="material-icons">first_page</i></button></li>
+			<li><button type="submit" class="btn waves-effect" name="pagina" value="<?= $pagina > 0 ? $pagina - 1 : 0 ?>"><i
+					 class="material-icons">chevron_left</i></a></li>
+			<li><button type="submit" class="btn waves-effect" name="pagina" value="<?= $pagina < ($pagina_total - 1) ? $pagina + 1 : $pagina_total - 1 ?>"><i
+					 class="material-icons">chevron_right</i></a></li>
+			<li><button type="submit" class="btn waves-effect" name="pagina" value="<?= $pagina_total - 1 ?>"><i class="material-icons">last_page</i></a></li>
+		</ul>
+		</form>
+	</div>
 </body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 
 </html>
