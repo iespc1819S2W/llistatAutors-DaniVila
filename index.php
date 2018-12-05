@@ -1,84 +1,91 @@
 <?php 
 
-    include_once 'conexion.php';
+include_once 'conexion.php';
 		
 		
-		// Session
-    session_start();
-		$nombre = isset($_SESSION['nombre']) ? $_SESSION['nombre'] : '';
-		$orden = isset($_SESSION['orden']) ? $_SESSION['orden'] : " ORDER BY ID_AUT ASC ";
+// Session
+session_start();
+$nombre = isset($_SESSION['nombre']) ? $_SESSION['nombre'] : '';
+$orden = isset($_SESSION['orden']) ? $_SESSION['orden'] : " ORDER BY ID_AUT ASC ";
 
 
 
-		//Ordenación
-		if (isset($_GET['ascID'])) {
-			$orden = " ORDER BY ID_AUT ASC ";			
-		}
+//Ordenación
+if (isset($_GET['ascID'])) {
+	$orden = " ORDER BY ID_AUT ASC ";
+}
 
-		if (isset($_GET['descID'])) {
-			$orden = " ORDER BY ID_AUT DESC ";
-		}
+if (isset($_GET['descID'])) {
+	$orden = " ORDER BY ID_AUT DESC ";
+}
 
-		if (isset($_GET['nomASC'])) {
-			$orden = " ORDER BY NOM_AUT ASC ";
-		}
+if (isset($_GET['nomASC'])) {
+	$orden = " ORDER BY NOM_AUT ASC ";
+}
 
-		if (isset($_GET['nomDESC'])) {
-			$orden = " ORDER BY NOM_AUT DESC ";
-		}
+if (isset($_GET['nomDESC'])) {
+	$orden = " ORDER BY NOM_AUT DESC ";
+}
 
-		$_SESSION['orden'] = $orden;
-
-
-
-
-    //Total registros máximos
-    $pagina_maximo = 10;
-    $pagina = !empty($_GET['pagina']) ? $_GET['pagina'] : 0;
-    $paginas = $pagina * $pagina_maximo;
+$_SESSION['orden'] = $orden;
 
 
 
 
-
-    //Consulta para tabla
-    $nombre = isset($_GET['nombre']) ? "WHERE NOM_AUT LIKE '%". $_GET['nombre'] . "%'" : "";
-    $sql = "SELECT ID_AUT, NOM_AUT FROM autors $nombre $orden LIMIT $paginas,$pagina_maximo";
-    // echo($sql);
-    $pdo = $con->prepare($sql);
-    $pdo->execute();
-		$row = $pdo->fetchAll(PDO::FETCH_ASSOC);
-		// echo("<pre>");
-		// print_r($row);
-		// echo("<pre>");
+ //Total registros máximos
+$pagina_maximo = 10;
+$pagina = !empty($_GET['pagina']) ? $_GET['pagina'] : 0;
+$paginas = $pagina * $pagina_maximo;
 
 
 
 
-    //Total de paginas
-    $sql = "SELECT ID_AUT FROM autors $nombre ORDER BY ID_AUT ASC";
-    $pdo = $con->prepare($sql);
-    $pdo->execute();
-    $row_total = $pdo->rowCount();
-		$pagina_total = ceil($row_total / $pagina_maximo);
+
+//DELETE
+if (isset($_GET['eliminar'])) {
+	$sql = "DELETE FROM AUTORS WHERE ID_AUT = " . $_GET['eliminar'];
+	echo ($sql);
+	$pdo = $con->prepare($sql);
+	$pdo->execute();
+}
 		
 
 
-		// if (isset($_POST['nuevo'])) {
-		// 	$sql = "INSERT INTO AUTORS(NOM_AUT) VALUES ('DANI')";
-		// 	$pdo = $con->prepare($sql);
-		// 	$pdo->execute();
+//INSERTAR
+if (isset($_GET['crearAutorB'])) {
+	$sql = "SELECT max(id_aut) FROM AUTORS";
+	$pdo = $con->prepare($sql);
+	$pdo->execute();
+	$idautResult = $pdo->fetch(PDO::FETCH_ASSOC);
+	$idaut = $idautResult['max(id_aut)'] + 1;
+	$sql = "INSERT INTO AUTORS (ID_AUT, NOM_AUT) VALUES (" . $idaut . ",'" . $_GET['crearAutor'] . "')";
+	echo ($sql);
+	$pdo = $con->prepare($sql);
+	$pdo->execute();
+}
 
-		// }
 
 
 
-		//DELETE
 
-		if(isset($_GET['eliminar'])){
+//Consulta para tabla
+$nombre = isset($_GET['nombre']) ? "WHERE NOM_AUT LIKE '%" . $_GET['nombre'] . "%'" : "";
+$sql = "SELECT ID_AUT, NOM_AUT FROM autors $nombre $orden LIMIT $paginas,$pagina_maximo";
+$pdo = $con->prepare($sql);
+$pdo->execute();
+$row = $pdo->fetchAll(PDO::FETCH_ASSOC);
 
-			$sql = "DELETE FROM AUTORS WHERE ID = " . $_GET['eliminar'];
-		}
+
+
+
+
+//Total de paginas
+$sql = "SELECT ID_AUT FROM autors $nombre ORDER BY ID_AUT ASC";
+$pdo = $con->prepare($sql);
+$pdo->execute();
+$row_total = $pdo->rowCount();
+$pagina_total = ceil($row_total / $pagina_maximo);
+
 ?>
 
 
@@ -106,32 +113,41 @@
 		<div class="row">
 			<form action="" method="get">
 				<div class="input-field col s4">
+					<i class="material-icons prefix">account_circle</i>
 					<input id="name" type="text" name="nombre" class="validate" value="<?= isset($_GET['nombre']) ? $_GET['nombre'] : '' ?>">
 					<label for="name">Buscar autor</label>
 				</div>
-				<div class="input-field col s3">
-					<button type="submit" class="blue lighten-2 waves-effect waves-light btn"><i class="material-icons left">search</i>Buscar</button>
+				<div class="input-field col s2">
+					<button type="submit" class="blue lighten-2 waves-effect waves-light btn"><i class="material-icons">search</i></button>
 				</div>
 				<div class="input-field col s4">
-				<?php if ($orden == " ORDER BY ID_AUT DESC "): ?>
-					<button type="submit" class="blue lighten-2 waves-effect waves-light btn" name="ascID" value="<?= $orden ?>"><i class="material-icons left">arrow_upward</i>ID</button>
-				<?php else :?>
-					<button type="submit" class="blue lighten-2 waves-effect waves-light btn" name="descID" value="<?= $orden ?>"><i class="material-icons left">arrow_downward</i>ID</button>
-				<?php endif ?>
-				<?php if ($orden == " ORDER BY NOM_AUT DESC "): ?>
-					<button type="submit" class="blue lighten-2 waves-effect waves-light btn" name="nomASC" value="<?= $orden ?>"><i class="material-icons left">arrow_upward</i>Nom</button>
-				<?php else: ?>
-					<button type="submit" class="blue lighten-2 waves-effect waves-light btn" name="nomDESC" value="<?= $orden ?>"><i class="material-icons left">arrow_downward</i>Nom</button>
-				<?php endif ?>
+					<i class="material-icons prefix">mode_edit</i>
+					<input type="text" name="crearAutor" id="crearAutor">
+					<label for="crearAutor">Crear autor</label>
 				</div>
+				<div  class="input-field col s2">
+					<button class="btn" name="crearAutorB"><i class="material-icons">add</i></button>
+				</div>
+				
 		</div>
 		<table class="striped">
 			<tr>
-				<th>ID</th>
-				<th>AUTOR</th>
+				<th>ID
+				<?php if ($orden == " ORDER BY ID_AUT DESC ") : ?>
+					<button type="submit" class="blue lighten-2 waves-effect waves-light btn" name="ascID" value="<?= $orden ?>"><i class="material-icons ">arrow_upward</i></button>
+				<?php else : ?>
+					<button type="submit" class="blue lighten-2 waves-effect waves-light btn" name="descID" value="<?= $orden ?>"><i class="material-icons ">arrow_downward</i></button>
+				<?php endif ?></th>
+				<th>AUTOR
+				<?php if ($orden == " ORDER BY NOM_AUT DESC ") : ?>
+					<button type="submit" class="blue lighten-2 waves-effect waves-light btn" name="nomASC" value="<?= $orden ?>"><i class="material-icons ">arrow_upward</i></button>
+				<?php else : ?>
+					<button type="submit" class="blue lighten-2 waves-effect waves-light btn" name="nomDESC" value="<?= $orden ?>"><i class="material-icons ">arrow_downward</i></button>
+				<?php endif ?>
+				</th>
 				<th>ACTION</th>
 			</tr>
-			<?php foreach($row as $value): ?>
+			<?php foreach ($row as $value) : ?>
 			<tr>
 				<td>
 					<?= $value['ID_AUT'] ?>
@@ -141,7 +157,7 @@
 				</td>
 				<td>
 					<button type="submit" class="btn waves-effect waves-light" value="<?php $value['ID_AUT'] ?>"><i class="material-icons">create</i></button>
-					<button type="submit" class="btn waves-effect waves-light red" name="eliminar" value="<?php $value['ID_AUT'] ?>"><i class="material-icons">delete</i></button>
+					<button type="submit" class="btn waves-effect waves-light red" name="eliminar" value="<?= $value['ID_AUT'] ?>"><i class="material-icons">delete</i></button>
 				</td>
 			</tr>
 			<?php endforeach ?>
