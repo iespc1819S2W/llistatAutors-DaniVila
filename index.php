@@ -109,19 +109,19 @@
 					<input id="name" type="text" name="nombre" class="validate" value="<?= isset($_GET['nombre']) ? $_GET['nombre'] : '' ?>">
 					<label for="name">Buscar autor</label>
 				</div>
-				<div class="input-field col s2">
-					<button type="submit" class="blue lighten-2 waves-effect waves-light btn"><i class="material-icons left">search</i>Buscar</a>
+				<div class="input-field col s3">
+					<button type="submit" class="blue lighten-2 waves-effect waves-light btn"><i class="material-icons left">search</i>Buscar</button>
 				</div>
-				<div class="input-field col s2">
+				<div class="input-field col s4">
 				<?php if ($orden == " ORDER BY ID_AUT DESC "): ?>
-					<button type="submit" class="blue lighten-2 waves-effect waves-light btn" name="ascID" value="<?= $orden ?>">0</button>
+					<button type="submit" class="blue lighten-2 waves-effect waves-light btn" name="ascID" value="<?= $orden ?>"><i class="material-icons left">arrow_upward</i>ID</button>
 				<?php else :?>
-					<button type="submit" class="blue lighten-2 waves-effect waves-light btn" name="descID" value="<?= $orden ?>">6000</button>
+					<button type="submit" class="blue lighten-2 waves-effect waves-light btn" name="descID" value="<?= $orden ?>"><i class="material-icons left">arrow_downward</i>ID</button>
 				<?php endif ?>
 				<?php if ($orden == " ORDER BY NOM_AUT DESC "): ?>
-					<button type="submit" class="blue lighten-2 waves-effect waves-light btn" name="nomASC" value="<?= $orden ?>">INICI</button>
+					<button type="submit" class="blue lighten-2 waves-effect waves-light btn" name="nomASC" value="<?= $orden ?>"><i class="material-icons left">arrow_upward</i>Nom</button>
 				<?php else: ?>
-					<button type="submit" class="blue lighten-2 waves-effect waves-light btn" name="nomDESC" value="<?= $orden ?>">Fi</button>
+					<button type="submit" class="blue lighten-2 waves-effect waves-light btn" name="nomDESC" value="<?= $orden ?>"><i class="material-icons left">arrow_downward</i>Nom</button>
 				<?php endif ?>
 				</div>
 		</div>
@@ -140,8 +140,8 @@
 					<?= $value['NOM_AUT'] ?>
 				</td>
 				<td>
-					<button type="submit" value="<?php $value['ID_AUT'] ?>">Editar</button>
-					<button type="submit" name="eliminar" value="<?php $value['ID_AUT'] ?>">Eliminar</button>
+					<button type="submit" class="btn waves-effect waves-light" value="<?php $value['ID_AUT'] ?>"><i class="material-icons">create</i></button>
+					<button type="submit" class="btn waves-effect waves-light red" name="eliminar" value="<?php $value['ID_AUT'] ?>"><i class="material-icons">delete</i></button>
 				</td>
 			</tr>
 			<?php endforeach ?>
