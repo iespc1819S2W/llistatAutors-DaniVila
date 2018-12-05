@@ -80,7 +80,7 @@ if (isset($_GET['confirmarEdit'])) {
 
 //Consulta para tabla
 $nombre = isset($_GET['nombre']) ? "WHERE NOM_AUT LIKE '%" . $_GET['nombre'] . "%'" : "";
-$sql = "SELECT ID_AUT, NOM_AUT FROM autors $nombre $orden LIMIT $paginas,$pagina_maximo";
+$sql = "SELECT ID_AUT, NOM_AUT, FK_NACIONALITAT FROM autors $nombre $orden LIMIT $paginas,$pagina_maximo";
 $pdo = $con->prepare($sql);
 $pdo->execute();
 $row = $pdo->fetchAll(PDO::FETCH_ASSOC);
@@ -155,7 +155,8 @@ $pagina_total = ceil($row_total / $pagina_maximo);
 					<button type="submit" class="blue lighten-2 waves-effect waves-light btn" name="nomDESC" value="<?= $orden ?>"><i class="material-icons ">arrow_downward</i></button>
 				<?php endif ?>
 				</th>
-				<th>ACTION</th>
+				<th>NACIONALITAT</th>
+				<th>EDITAR/ELIMINAR</th>
 			</tr>
 			<?php foreach ($row as $value) : ?>
 			<tr>
@@ -168,6 +169,9 @@ $pagina_total = ceil($row_total / $pagina_maximo);
 				<?php else: ?>
 					<?= $value['NOM_AUT'] ?>
 				<?php endif ?>
+				</td>
+				<td>
+				<?= $value['FK_NACIONALITAT'] ?>
 				</td>
 				<td>
 				<?php if(isset($_GET['editar']) && $value['ID_AUT'] == $_GET['editar'] ): ?>
