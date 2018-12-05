@@ -44,7 +44,6 @@ $paginas = $pagina * $pagina_maximo;
 //DELETE
 if (isset($_GET['eliminar'])) {
 	$sql = "DELETE FROM AUTORS WHERE ID_AUT = " . $_GET['eliminar'];
-	echo ($sql);
 	$pdo = $con->prepare($sql);
 	$pdo->execute();
 }
@@ -59,10 +58,21 @@ if (isset($_GET['crearAutorB'])) {
 	$idautResult = $pdo->fetch(PDO::FETCH_ASSOC);
 	$idaut = $idautResult['max(id_aut)'] + 1;
 	$sql = "INSERT INTO AUTORS (ID_AUT, NOM_AUT) VALUES (" . $idaut . ",'" . $_GET['crearAutor'] . "')";
-	echo ($sql);
 	$pdo = $con->prepare($sql);
 	$pdo->execute();
 }
+
+
+
+//EDITAR
+if (isset($_GET['confirmarEdit'])) {
+	$nomEditar = $_GET['editarNom'];
+	$idEdit = $_GET['confirmarEdit'];
+	$sql = "UPDATE AUTORS SET NOM_AUT = '$nomEditar' WHERE ID_AUT = '$idEdit'";
+	$pdo = $con->prepare($sql);
+	$pdo->execute();
+}
+
 
 
 
@@ -80,7 +90,7 @@ $row = $pdo->fetchAll(PDO::FETCH_ASSOC);
 
 
 //Total de paginas
-$sql = "SELECT ID_AUT FROM autors $nombre ORDER BY ID_AUT ASC";
+$sql = "SELECT ID_AUT FROM autors $nombre";
 $pdo = $con->prepare($sql);
 $pdo->execute();
 $row_total = $pdo->rowCount();
@@ -153,11 +163,20 @@ $pagina_total = ceil($row_total / $pagina_maximo);
 					<?= $value['ID_AUT'] ?>
 				</td>
 				<td>
+				<?php if(isset($_GET['editar']) && $_GET['editar'] == $value['ID_AUT']): ?>
+						<input type="text" name="editarNom" value="<?= $value['NOM_AUT'] ?>">
+				<?php else: ?>
 					<?= $value['NOM_AUT'] ?>
+				<?php endif ?>
 				</td>
 				<td>
-					<button type="submit" class="btn waves-effect waves-light" value="<?php $value['ID_AUT'] ?>"><i class="material-icons">create</i></button>
+				<?php if(isset($_GET['editar']) && $value['ID_AUT'] == $_GET['editar'] ): ?>
+					<button type="submit" class="btn waves-effect waves-light blue" name="confirmarEdit" value="<?= $value['ID_AUT'] ?>"><i class="material-icons">check</i></button>
+					<button type="submit" class="btn waves-effect waves-light red" name="eliminar"><i class="material-icons">clear</i></button>
+				<?php else: ?>
+					<button type="submit" class="btn waves-effect waves-light" name="editar" value="<?= $value['ID_AUT'] ?>"><i class="material-icons">create</i></button>
 					<button type="submit" class="btn waves-effect waves-light red" name="eliminar" value="<?= $value['ID_AUT'] ?>"><i class="material-icons">delete</i></button>
+				<?php endif ?>
 				</td>
 			</tr>
 			<?php endforeach ?>
@@ -177,3 +196,7 @@ $pagina_total = ceil($row_total / $pagina_maximo);
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 
 </html>
+
+<?php 
+
+// if (!isset($_GET['editar']) :?>
